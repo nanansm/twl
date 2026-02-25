@@ -1,0 +1,288 @@
+/* =========================================
+           1. RESET & VARIABLES 
+           ========================================= */
+           :root {
+            --jet-black: #0A0A0A;
+            --bone-white: #F9F6EE;
+            --maximum-red: #D62226;
+            --grey-accent: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body, html {
+            background-color: var(--jet-black);
+            color: var(--bone-white);
+            overflow-x: hidden; 
+        }
+
+        /* =========================================
+           2. LAYOUT & RESPONSIVE CONSTRAINTS
+           ========================================= */
+        .wrapper {
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+            min-height: 100vh;
+            background-color: var(--jet-black);
+        }
+
+        /* =========================================
+           3. MAIN CONTENT
+           ========================================= */
+        .main-content {
+            padding: 3rem 1.5rem;
+            /* Padding bawah ekstra besar agar konten terakhir tidak tertutup katalog */
+            padding-bottom: 180px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+
+        .logo-box {
+            width: 90px;
+            height: 90px;
+            background-color: transparent;
+            border: 2px solid var(--bone-white);
+            border-radius: 50%;
+            margin: 0 auto 1.2rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .logo-image {
+          width: 96px; /* Ukuran standar ala Linktree */
+          height: 96px;
+          border-radius: 50%; /* Ini yang membuatnya bulat sempurna */
+          object-fit: cover; /* Memastikan gambar memenuhi lingkaran tanpa gepeng */
+          object-position: center; /* Fokus di tengah gambar */
+          border: 1px solid var(--bone-white); /* Garis tepi agar kontras */
+          margin: 0 auto 1.2rem auto;
+          display: block;
+      }
+
+        .brand-title {
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 0.3rem;
+            text-transform: uppercase;
+        }
+
+        .tagline {
+            font-size: 0.75rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: var(--maximum-red);
+        }
+
+        /* =========================================
+           SLIDESHOW 4:5 RATIO
+           ========================================= */
+           .slideshow-container {
+            width: 100%;
+            aspect-ratio: 4 / 5; /* Memaksa rasio portrait 4:5 di semua device */
+            position: relative;
+            margin-bottom: 1rem;
+            border: 1px solid var(--bone-white);
+            overflow: hidden;
+            background-color: var(--jet-black);
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Mencegah gambar gepeng, otomatis menyesuaikan ruang */
+            object-position: center;
+        }
+
+        /* Animasi Transisi Halus */
+        .fade {
+            animation-name: fadeAnim;
+            animation-duration: 0.8s;
+        }
+
+        @keyframes fadeAnim {
+            from {opacity: .4}
+            to {opacity: 1}
+        }
+
+        /* Tombol Navigasi Kiri/Kanan */
+        .slide-nav {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: auto;
+            padding: 10px 10px;
+            color: var(--bone-white);
+            font-weight: bold;
+            font-size: 0.8rem;
+            transition: 0.3s ease;
+            user-select: none;
+            background-color: rgba(10, 10, 10, 0.2);
+            border: 1px solid transparent;
+            text-decoration: none;
+        }
+
+        .slide-nav.prev { left: 0; border-radius: 0 4px 4px 0; }
+        .slide-nav.next { right: 0; border-radius: 4px 0 0 4px; }
+
+        .slide-nav:hover {
+            background-color: var(--maximum-red);
+            border-color: var(--bone-white);
+        }
+
+        /* Indikator Titik (Dots) */
+        .dot-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 6px;
+            width: 25px; /* Bentuk garis pipih ala streetwear UI */
+            margin: 0 4px;
+            background-color: var(--grey-accent);
+            display: inline-block;
+            transition: background-color 0.4s ease;
+        }
+
+        .active, .dot:hover {
+            background-color: var(--bone-white);
+        }
+
+        .links-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding-top: 25px;
+            padding-bottom: 100px;
+        }
+
+        .link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            width: 100%;
+            padding: 1.2rem;
+            background: transparent;
+            border: 2px solid var(--bone-white);
+            color: var(--bone-white);
+            text-decoration: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .link-btn:hover {
+            background: var(--bone-white);
+            color: var(--jet-black);
+        }
+
+        .link-btn.primary {
+            background: var(--maximum-red);
+            border-color: var(--maximum-red);
+            color: var(--bone-white);
+            margin-bottom: 1rem;
+        }
+
+        .link-btn.primary:hover {
+            background: transparent;
+            color: var(--maximum-red);
+        }
+
+        /* =========================================
+           4. STICKY BOTTOM CATALOG (Langsung Tampil)
+           ========================================= */
+        .sticky-catalog {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 500px; /* Sejajar dengan wrapper */
+            background-color: var(--grey-accent);
+            color: var(--jet-black);
+            padding: 1rem 1.2rem;
+            z-index: 10;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            box-shadow: 0px -10px 30px rgba(0,0,0,0.8);
+        }
+
+        .catalog-header {
+            font-size: 0.85rem;
+            font-weight: 900;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--bone-white);
+        }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .catalog-item {
+            aspect-ratio: 1;
+            background-color: #E5E5E5; /* Warna dasar jika gambar telat loading */
+            border: 1px solid #CCC;
+            border-radius: 6px;
+            background-size: cover;
+            background-position: center;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .catalog-item:hover {
+            opacity: 0.8;
+        }
+
+        .view-all {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            border: none;
+            color: var(--bone-white);
+            font-weight: 900;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+        }
+
+        .view-all span {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
